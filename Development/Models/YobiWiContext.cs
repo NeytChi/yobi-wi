@@ -15,7 +15,6 @@ namespace YobiWi.Development.Models
         }
 
         public virtual DbSet<Build> Builds { get; set; }
-        public virtual DbSet<Files> Files { get; set; }
         public virtual DbSet<LogMessage> Logs { get; set; }
         public virtual DbSet<UserCache> Users { get; set; }
 
@@ -44,29 +43,25 @@ namespace YobiWi.Development.Models
                 entity.Property(build => build.userId)
                     .HasColumnName("user_id")
                     .HasColumnType("int(11)");
-                
-                entity.Property(build => build.fileId)
-                    .HasColumnName("file_id")
-                    .HasColumnType("int(11)");
 
                 entity.Property(build => build.buildName)
                     .HasColumnName("build_name")
-                    .HasColumnType("varchar(256)");
+                    .HasColumnType("varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci");
                 
                 entity.Property(build => build.archiveName)
                     .HasColumnName("archive_name")
-                    .HasColumnType("varchar(256)");
+                    .HasColumnType("varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci");
 
                 entity.Property(build => build.buildHash)
                     .HasColumnName("build_hash")
                     .HasColumnType("varchar(20)");
                 
-                entity.Property(build => build.installLink)
-                    .HasColumnName("install_link")
+                entity.Property(build => build.urlInstall)
+                    .HasColumnName("url_install")
                     .HasColumnType("varchar(256)");
 
-                entity.Property(build => build.urlManifest)
-                    .HasColumnName("url_manifest")
+                entity.Property(build => build.urlArchive)
+                    .HasColumnName("url_archive")
                     .HasColumnType("varchar(256)");
 
                 entity.Property(build => build.urlIcon)
@@ -83,40 +78,15 @@ namespace YobiWi.Development.Models
 
                 entity.Property(build => build.bundleIdentifier)
                     .HasColumnName("bundle_identifier")
-                    .HasColumnType("varchar(256)");
+                    .HasColumnType("varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci");
 
                 entity.Property(build => build.createdAt)
                     .HasColumnName("created_at")
                     .HasColumnType("int(11)");
-            });
 
-            modelBuilder.Entity<Files>(entity =>
-            {
-                entity.HasKey(e => e.fileId)
-                    .HasName("PRIMARY");
-
-                entity.ToTable("files");
-
-                entity.Property(e => e.fileId)
-                    .HasColumnName("file_id")
-                    .HasColumnType("bigint(20)");
-
-                entity.Property(e => e.fileExtension)
-                    .HasColumnName("file_extension")
-                    .HasColumnType("varchar(10)");
-
-                entity.Property(e => e.fileName)
-                    .IsRequired()
-                    .HasColumnName("file_name")
-                    .HasColumnType("varchar(20)");
-
-                entity.Property(e => e.filePath)
-                    .HasColumnName("file_path")
-                    .HasColumnType("varchar(256)");
-
-                entity.Property(e => e.fileType)
-                    .HasColumnName("file_type")
-                    .HasColumnType("varchar(10)");
+                entity.Property(build => build.buildDeleted)
+                    .HasColumnName("build_delete")
+                    .HasColumnType("boolean");
             });
             modelBuilder.Entity<UserCache>(entity =>
             {

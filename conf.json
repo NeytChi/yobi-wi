@@ -9,7 +9,7 @@
 	"mail_address" : "test657483921@gmail.com", 
 	"mail_password" : "pass1234",
 	"smtp_server" : "smtp.gmail.com",
-	"path_archives" : "/home/neytchi/Projects/YobiWi/",
+	"path_archives" : "/home/neytchi/Projects/Builds/",
 	"smtp_port": 587,
 	"log_files" : true
 }

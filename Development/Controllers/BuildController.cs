@@ -4,6 +4,7 @@ using YobiWi.Development;
 using Microsoft.AspNetCore.Mvc;
 using YobiWi.Development.Models;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace Controllers
 {
@@ -19,42 +20,58 @@ namespace Controllers
         public BuildController(YobiWiContext context)
         {
             this.context = context;
-            this.uploader = new UploaderBuilds(context, Config.Domen, Config.Domen, Config.Domen);
+            this.uploader = new UploaderBuilds(context);
         }
         [HttpPost]
         [ActionName("Upload")]
         public ActionResult<dynamic> UploadBuild(IFormFile build, [FromQuery] string userToken)
         {
             string message = null;
-            if (uploader.UploadBuild(build, userToken, ref message))
+            Build buildUploaded = uploader.UploadBuild(build, userToken, ref message);
+            if (buildUploaded != null)
             {
-                return new { success = true };
+                return new 
+                { 
+                    success = true,
+                    data = ResponseBuild(buildUploaded)
+                };
             }
             return Return500Error(message);
         }
         [HttpGet]
         [ActionName("All")]
-        public ActionResult<dynamic> All([FromQuery] string userToken, [FromQuery] int from, [FromQuery] int count)
+        public ActionResult<dynamic> All([FromQuery] string userToken, 
+        [FromQuery] int from, [FromQuery] int count)
         {
-            return (from build in context.Builds
+            List<Build> builds = (from build in context.Builds
             join user in context.Users on build.userId equals user.userId
             where user.userToken == userToken 
             && user.activate == true
             && user.deleted == false
+            && build.buildDeleted == false
             select build).Skip(from * count)
-            .Take(from).ToList();
+            .Take(count).ToList();
+            Log.Info("Select all builds.");
+            return new 
+            {
+                success = true,
+                data = ResponseBuilds(builds)
+            };
         }
         [HttpPost]
         [ActionName("Delete")]
         public ActionResult<dynamic> Delete([FromQuery] string hash)
         {
             string message = "";
-            Build build = context.Builds.Where(b => b.buildHash == hash).FirstOrDefault();
-            if (build != null)
+            Build buildToDelete = context.Builds.Where(build
+            => build.buildHash == hash
+            && build.buildDeleted == false).FirstOrDefault();
+            if (buildToDelete != null)
             {
-                Files file = context.Files.Where(f => f.fileId == build.fileId).First(); 
-                //LoaderFile.DeleteFile(file);
-                //uploader.DeleteDirectory(app.app_hash);
+                buildToDelete.buildDeleted = true;
+                context.Builds.Update(buildToDelete);
+                context.SaveChanges();
+                Log.Info("Delete build, buildId ->" + buildToDelete.buildId + ".");
                 return new { success = true };
             }
             else
@@ -67,7 +84,22 @@ namespace Controllers
         [ActionName("Current")]
         public ActionResult<dynamic> Current([FromQuery] string hash)
         {
-            return context.Builds.Where(b => b.buildHash == hash).FirstOrDefault();
+            Build currentBuild = context.Builds.Where(build 
+            => build.buildHash == hash
+            && build.buildDeleted == false).FirstOrDefault();
+            if (currentBuild != null)
+            {
+                Log.Info("Select build by hash ->" + hash + ".");
+                return new 
+                {
+                    success = true,
+                    data = ResponseBuild(currentBuild)
+                };
+            }
+            else
+            {
+                return Return500Error("Server can't define build.");
+            }
         }
         public dynamic Return500Error(string message)
         {
@@ -77,6 +109,40 @@ namespace Controllers
                 Response.StatusCode = 500;
             }
             return new { success = false, message = message, };
+        }
+        public dynamic ResponseBuilds(List<Build> builds)
+        {
+            if (builds != null)
+            {
+                List<dynamic> data = new List<dynamic>();
+                foreach(Build build in builds)
+                {
+                    data.Add(ResponseBuild(build));
+                }
+                return data;
+            }
+            return null;
+        }
+        public dynamic ResponseBuild(Build build)
+        {
+            if (build != null)
+            {
+                return new 
+                {
+                    build_id = build.buildId,
+                    build_name = build.buildName,
+                    archive_name = build.archiveName,
+                    build_hash = build.buildHash,
+                    url_archive = Config.Domen + build.urlArchive,
+                    url_install = Config.Domen + build.urlInstall,
+                    url_icon = Config.Domen + build.urlIcon,
+                    version = build.version,
+                    build_number = build.buildName,
+                    bundle_identifier = build.bundleIdentifier,
+                    create_at = build.createdAt
+                };
+            }
+            return null;
         }
     }
 }

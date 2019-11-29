@@ -17,47 +17,32 @@ namespace YobiWi.Development
     public class UploaderBuilds
     {
         public YobiWiContext context;
-        public Random random = new Random();
         public FileManager fileManager = FileManager.GetInstance();
         public string pathArchives = Config.GetServerConfigValue("path_archives", JTokenType.String);
-        public string fullPathPlist = "";
-        public string relativePathPlist = "/Plist/";
-        public string fullPathUpload = "";
-        public string relativePathUpload = "/files/Upload/";
-        public string keyValueSet = "(?<=<string>)(.*)(?=</string>)";
-        public string domen = "";
-        public string sslDomen = "";
-        //string ipaPlistPath = "itms-services://?action=download-manifest&url=https://" + Ssl_Domen + "/Plist/" + ipa.app_hash + ".plist";
+        //public string ipaPlistPath = "itms-services://?action=download-manifest&url=https://" + Ssl_Domen + "/Plist/" + ipa.app_hash + ".plist";
         
-        public UploaderBuilds(YobiWiContext context, string domen, string sslDomen, string pathPlist)
+        public UploaderBuilds(YobiWiContext context)
         {
-            this.domen = domen;
             this.context = context;
-            this.sslDomen = sslDomen;
-            this.fullPathPlist = pathPlist;
-            this.fullPathUpload = Config.currentDirectory + relativePathUpload;
-            this.fullPathPlist = fullPathPlist + relativePathPlist;
-            Directory.CreateDirectory(fullPathUpload);
-            Directory.CreateDirectory(fullPathPlist);
         }
-        public bool UploadBuild(IFormFile build, string userToken, ref string message)
+        public Build UploadBuild(IFormFile build, string userToken, ref string message)
         {
-            if (build != null && !string.IsNullOrEmpty(userToken))
+            if (build != null)
             {
-                if (build.ContentType.Contains("application/vnd.android.package-archive"))
+                if (build.ContentType == "application/vnd.android.package-archive")
                 {
-                    UploadAPK(build, userToken, ref message);
+                    return UploadAPK(build, userToken, ref message);
                 }
-                else if (build.ContentType.Contains("application/octet-stream"))
+                else if (build.ContentType == "application/octet-stream")
                 {
-                    UploadIpa(build, userToken, ref message);
+                    return UploadIpa(build, userToken, ref message);
                 }
                 else
                 {
                     message = "Server can't define build type.";
                 }
             }
-            return false;
+            return null;
         }
         public Build UploadIpa(IFormFile build, string userToken, ref string message)
         {
@@ -76,12 +61,13 @@ namespace YobiWi.Development
                             ipa.userId = GetUserId(userToken);
                             ipa.buildHash = hash;
                             ipa.archiveName = build.FileName;
-                            ipa.urlManifest = pathDirectory + "/" + build.FileName;
-                            ipa.installLink = plistPath.Substring(pathArchives.Length);
+                            ipa.urlArchive = hash + "/" + build.FileName;
+                            ipa.urlInstall = hash + "/" + hash + ".info";
                             ipa.createdAt = DateTimeOffset.Now.ToUnixTimeSeconds();
+                            CreateInstallPlist(ipa, hash);
                             SaveBuild(ipa);
-                            CreateInstallPlist(ipa);
                             Log.Info("Uploaded IPA build, Hash ->" + hash + ".");
+                            return ipa;
                         }
                     }
                     else
@@ -129,7 +115,7 @@ namespace YobiWi.Development
                     string iconPath = SearchPathRelativeFileName(xml["CFBundleIconFiles"], pathDirectoryIPA);
                     if (iconPath != null)
                     {
-                        ipa.urlIcon = iconPath.Substring(Config.currentDirectory.Length);
+                        ipa.urlIcon = iconPath.Substring(pathArchives.Length);
                     }
                 }
                 if (xml.ContainsKey("CFBundleShortVersionString"))
@@ -149,35 +135,39 @@ namespace YobiWi.Development
             }
             return null;
         }
-        public void CreateInstallPlist(Build ipa)
+        public void CreateInstallPlist(Build ipa, string hash)
         {
-            XElement xAssets = new XElement("key", "assets");
-            XElement xFirstDict = new XElement("dict", 
-            new XElement("key", "kind"),
-            new XElement("string", "software-package"),
-            new XElement("key", "url"),
-            new XElement("string", ipa.urlManifest));
-            XElement xFirstArray = new XElement("array", xFirstDict);
-            XElement xMetadata = new XElement("key", "metadata");
-            XElement xSecondDict = new XElement("dict", 
-            new XElement("key", "bundle-identifier"),
-            new XElement("string", ipa.bundleIdentifier),
-            new XElement("key", "bundle-version"),
-            new XElement("string", "4.0"),
-            new XElement("key", "kind"),
-            new XElement("string", "software"),
-            new XElement("key", "title"),
-            new XElement("string", ipa.buildName));
-            XElement xThirdDict = new XElement("dict", xAssets, xFirstArray, xMetadata, xSecondDict);
-            XElement xItems = new XElement("key", "items");
-            XElement xSecondArray = new XElement("array", xThirdDict);
-            XElement xFourDict = new XElement("dict", xItems, xSecondArray);
-            XElement xPlist = new XElement("plist", new XAttribute("version", "1.0"), xFourDict);
-            XDocument xDocument = new XDocument(xPlist);
-            xDocument.AddFirst(new XDocumentType("plist", "-//Apple//DTD PLIST 1.0//EN", 
-            "http://www.apple.com/DTDs/PropertyList-1.0.dtd", null));
-            xDocument.Save(pathArchives + "Info.plist");
-            Log.Info("Create installation plist.");
+            if (ipa != null && !string.IsNullOrWhiteSpace(hash))
+            {
+                XElement xAssets = new XElement("key", "assets");
+                XElement xFirstDict = new XElement("dict", 
+                new XElement("key", "kind"),
+                new XElement("string", "software-package"),
+                new XElement("key", "url"),
+                new XElement("string", Config.Domen + hash + "/" + ipa.archiveName));
+                XElement xFirstArray = new XElement("array", xFirstDict);
+                XElement xMetadata = new XElement("key", "metadata");
+                XElement xSecondDict = new XElement("dict", 
+                new XElement("key", "bundle-identifier"),
+                new XElement("string", ipa.bundleIdentifier),
+                new XElement("key", "bundle-version"),
+                new XElement("string", "4.0"),
+                new XElement("key", "kind"),
+                new XElement("string", "software"),
+                new XElement("key", "title"),
+                new XElement("string", ipa.buildName));
+                XElement xThirdDict = new XElement("dict", xAssets, xFirstArray, xMetadata, xSecondDict);
+                XElement xItems = new XElement("key", "items");
+                XElement xSecondArray = new XElement("array", xThirdDict);
+                XElement xFourDict = new XElement("dict", xItems, xSecondArray);
+                XElement xPlist = new XElement("plist", new XAttribute("version", "1.0"), xFourDict);
+                XDocument xDocument = new XDocument(xPlist);
+                xDocument.AddFirst(new XDocumentType("plist", "-//Apple//DTD PLIST 1.0//EN", 
+                "http://www.apple.com/DTDs/PropertyList-1.0.dtd", null));
+                xDocument.Save(pathArchives + hash + "/" + hash + ".plist");
+                Log.Info("Create installation plist.");
+            }
+            Log.Error("Server can't create installation plist.");
         }
         // public string SetManifestLinkToPlist(string plistInfo, string pathIpaArchive)
         // {
@@ -198,7 +188,7 @@ namespace YobiWi.Development
                 int start = xml.IndexOf(@"<key>" + key + @"</key>", StringComparison.Ordinal);
                 if (start != -1) 
                 {
-                    Regex regex = new Regex(keyValueSet, RegexOptions.Multiline);
+                    Regex regex = new Regex("(?<=<string>)(.*)(?=</string>)", RegexOptions.Multiline);
                     Match match = regex.Match(xml, start);
                     if (match.Success)
                     {
@@ -237,7 +227,7 @@ namespace YobiWi.Development
             string[] files = Directory.GetFiles(pathCurrent);
             foreach (string file in files)
             {
-                if (file == pathCurrent + "/" + nameFile) 
+                if (file == pathCurrent + nameFile) 
                 { 
                     return file; 
                 }
@@ -248,7 +238,7 @@ namespace YobiWi.Development
                 FileAttributes attr = File.GetAttributes(folder);
                 if (attr.HasFlag(FileAttributes.Directory))
                 {
-                    findPathFile = SearchPathToFile(nameFile, folder);
+                    findPathFile = SearchPathToFile(nameFile, folder + "/");
                 }
             }
             return findPathFile;
@@ -278,8 +268,8 @@ namespace YobiWi.Development
                         userId = GetUserId(userToken),
                         buildHash = hash,
                         archiveName = build.FileName,
-                        urlManifest = "/" + hash + "/" + build.FileName,
-                        installLink = "/" + hash + "/" + build.FileName,
+                        urlArchive = "/" + hash + "/" + build.FileName,
+                        urlInstall = "/" + hash + "/" + build.FileName,
                         createdAt = DateTimeOffset.Now.ToUnixTimeSeconds() 
                     };
                     GetAPKBuildWithInfo(pathDirectory, ref apk);
