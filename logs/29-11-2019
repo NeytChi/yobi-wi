@@ -80,3 +80,4 @@ Created at: 29.11.19 15:19:10 | info | Message: Get IPA set info. | UID: 0 | UIP
 Created at: 29.11.19 15:19:10 | info | Message: Create installation plist. | UID: 0 | UIP:  | TID: 7 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
 Created at: 29.11.19 15:19:10 | ERROR | Message: Server can't create installation plist. | UID: 0 | UIP:  | TID: 7 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
 Created at: 29.11.19 15:19:11 | info | Message: Uploaded IPA build, Hash ->mvqKmo. | UID: 0 | UIP:  | TID: 7 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 29.11.19 15:50:56 | info | Message: Start server program. | UID: 0 | UIP:  | TID: 1 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
