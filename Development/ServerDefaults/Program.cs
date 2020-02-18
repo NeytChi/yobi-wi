@@ -3,12 +3,15 @@ using Common;
 using Microsoft.AspNetCore;
 using YobiWi.Development.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace Common
 {
     public class Program
     {
         public static bool requestView = false;    
+        public static IConfigurationRoot serverConfig;  
         public static void Main(string[] args)
         {
             if (args != null)
@@ -21,9 +24,7 @@ namespace Common
                         return;
                     }
                     if (args[0] == "-v")
-                    {
                         requestView = true;
-                    }
                 }
             }
             Initialization();
@@ -53,6 +54,19 @@ namespace Common
             }
             Console.WriteLine("Database '" + Config.databaseConfig["Database"].ToString()
             + "' was deleted.");
+        }
+        public static IConfigurationRoot serverConfiguration()
+        {
+            if (serverConfig == null) {
+                serverConfig = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddEnvironmentVariables()
+                .AddJsonFile("server.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"server.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", 
+                    optional: true, reloadOnChange: true)
+                .Build();
+            }
+            return serverConfig;
         }
     }
 }

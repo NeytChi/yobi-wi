@@ -1,15 +1,14 @@
-﻿using Common;
+﻿using YobiWi.Development.Models;
+
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using YobiWi.Development.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Common
 {
@@ -26,15 +25,20 @@ namespace Common
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var serverConfig = Program.serverConfiguration();
             services.AddCors(options =>
             {
+                var origins = serverConfig.GetSection("allow_origin")
+                .GetChildren()
+                .Select(x => x.Value)
+                .ToArray();
                 options.AddPolicy(AllowSpecificOrigins,
                 builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.WithOrigins(origins)
                     .AllowAnyMethod()
-                    .AllowAnyHeader();
-                    //.AllowCredentials();
+                    .AllowAnyHeader()
+                    .AllowCredentials();
                 });
             });
             services.AddDbContext<YobiWiContext>((serviceProvider, options)
@@ -59,10 +63,7 @@ namespace Common
             }
             if (Program.requestView)
             {
-                app.Use(next 
-                => context 
-                => 
-                { 
+                app.Use(next => context => { 
                     context.Request.EnableRewind(); 
                     return next(context); 
                 });

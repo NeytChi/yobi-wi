@@ -9,8 +9,8 @@ namespace Common
     {
         public static JObject serverConfig;
         public static JObject databaseConfig;
-        public static string configurationName = "conf.json";
-        public static string dbconfName = "dbconf.json";
+        public static string configurationName = "server.json";
+        public static string dbconfName = "database.json";
         public static string IP = "127.0.0.1";
         public static string Domen = "(none)";
         public static int Port = 8023;

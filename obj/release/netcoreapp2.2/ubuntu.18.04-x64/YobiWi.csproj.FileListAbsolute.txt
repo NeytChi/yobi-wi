@@ -1,0 +1,17 @@
+/home/neytchi/project/yobi-wi/bin/release/netcoreapp2.2/ubuntu.18.04-x64/libhostpolicy.so
+/home/neytchi/project/yobi-wi/bin/release/netcoreapp2.2/ubuntu.18.04-x64/libhostfxr.so
+/home/neytchi/project/yobi-wi/bin/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi
+/home/neytchi/project/yobi-wi/bin/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.deps.json
+/home/neytchi/project/yobi-wi/bin/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.runtimeconfig.json
+/home/neytchi/project/yobi-wi/bin/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.runtimeconfig.dev.json
+/home/neytchi/project/yobi-wi/bin/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.dll
+/home/neytchi/project/yobi-wi/bin/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.pdb
+/home/neytchi/project/yobi-wi/obj/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.csprojAssemblyReference.cache
+/home/neytchi/project/yobi-wi/obj/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.csproj.CoreCompileInputs.cache
+/home/neytchi/project/yobi-wi/obj/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.RazorAssemblyInfo.cache
+/home/neytchi/project/yobi-wi/obj/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.RazorAssemblyInfo.cs
+/home/neytchi/project/yobi-wi/obj/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.AssemblyInfoInputs.cache
+/home/neytchi/project/yobi-wi/obj/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.AssemblyInfo.cs
+/home/neytchi/project/yobi-wi/obj/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.RazorTargetAssemblyInfo.cache
+/home/neytchi/project/yobi-wi/obj/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.dll
+/home/neytchi/project/yobi-wi/obj/release/netcoreapp2.2/ubuntu.18.04-x64/YobiWi.pdb

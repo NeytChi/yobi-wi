@@ -1,8 +1,0 @@
-{ 
-	"Server" : "localhost",
-	"Database" : "yobiWi", 
-	"User" : "root", 
-	"Password" : "root", 
-   	"Pooling" : "false",
-	"SslMode" : "none"
-}

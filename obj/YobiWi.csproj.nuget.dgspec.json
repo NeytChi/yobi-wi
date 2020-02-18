@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/neytchi/Projects/YobiWi/YobiWi.csproj": {}
+    "/home/neytchi/project/yobi-wi/YobiWi.csproj": {}
   },
   "projects": {
-    "/home/neytchi/Projects/YobiWi/YobiWi.csproj": {
+    "/home/neytchi/project/yobi-wi/YobiWi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/neytchi/Projects/YobiWi/YobiWi.csproj",
+        "projectUniqueName": "/home/neytchi/project/yobi-wi/YobiWi.csproj",
         "projectName": "YobiWi",
-        "projectPath": "/home/neytchi/Projects/YobiWi/YobiWi.csproj",
+        "projectPath": "/home/neytchi/project/yobi-wi/YobiWi.csproj",
         "packagesPath": "/home/neytchi/.nuget/packages/",
-        "outputPath": "/home/neytchi/Projects/YobiWi/obj/",
+        "outputPath": "/home/neytchi/project/yobi-wi/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/share/dotnet/sdk/NuGetFallbackFolder"
@@ -49,7 +49,7 @@
             "Microsoft.AspNetCore.App": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.2.0, )",
+              "version": "[2.2.7, )",
               "autoReferenced": true
             },
             "Microsoft.AspNetCore.Razor.Design": {
@@ -70,7 +70,7 @@
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.2.0, )",
+              "version": "[2.2.7, )",
               "autoReferenced": true
             },
             "Pomelo.EntityFrameworkCore.MySql": {
@@ -83,6 +83,11 @@
           ],
           "assetTargetFallback": true,
           "warn": true
+        }
+      },
+      "runtimes": {
+        "ubuntu.18.04-x64": {
+          "#import": []
         }
       }
     }

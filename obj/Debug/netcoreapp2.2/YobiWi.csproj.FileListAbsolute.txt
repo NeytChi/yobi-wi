@@ -12,3 +12,17 @@
 /home/neytchi/Projects/YobiWi/obj/Debug/netcoreapp2.2/YobiWi.RazorTargetAssemblyInfo.cache
 /home/neytchi/Projects/YobiWi/obj/Debug/netcoreapp2.2/YobiWi.dll
 /home/neytchi/Projects/YobiWi/obj/Debug/netcoreapp2.2/YobiWi.pdb
+/home/neytchi/project/yobi-wi/bin/Debug/netcoreapp2.2/YobiWi.deps.json
+/home/neytchi/project/yobi-wi/bin/Debug/netcoreapp2.2/YobiWi.runtimeconfig.json
+/home/neytchi/project/yobi-wi/bin/Debug/netcoreapp2.2/YobiWi.runtimeconfig.dev.json
+/home/neytchi/project/yobi-wi/bin/Debug/netcoreapp2.2/YobiWi.dll
+/home/neytchi/project/yobi-wi/bin/Debug/netcoreapp2.2/YobiWi.pdb
+/home/neytchi/project/yobi-wi/obj/Debug/netcoreapp2.2/YobiWi.csprojAssemblyReference.cache
+/home/neytchi/project/yobi-wi/obj/Debug/netcoreapp2.2/YobiWi.csproj.CoreCompileInputs.cache
+/home/neytchi/project/yobi-wi/obj/Debug/netcoreapp2.2/YobiWi.RazorAssemblyInfo.cache
+/home/neytchi/project/yobi-wi/obj/Debug/netcoreapp2.2/YobiWi.RazorAssemblyInfo.cs
+/home/neytchi/project/yobi-wi/obj/Debug/netcoreapp2.2/YobiWi.AssemblyInfoInputs.cache
+/home/neytchi/project/yobi-wi/obj/Debug/netcoreapp2.2/YobiWi.AssemblyInfo.cs
+/home/neytchi/project/yobi-wi/obj/Debug/netcoreapp2.2/YobiWi.RazorTargetAssemblyInfo.cache
+/home/neytchi/project/yobi-wi/obj/Debug/netcoreapp2.2/YobiWi.dll
+/home/neytchi/project/yobi-wi/obj/Debug/netcoreapp2.2/YobiWi.pdb

@@ -1,0 +1,15 @@
+Created at: 2/17/20 10:35:53 AM | info | Message: Start server program. | UID: 0 | UIP:  | TID: 1 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:36:18 AM | info | Message: Validating email->'neyton61@gmail.com | UID: 0 | UIP:  | TID: 7 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:36:19 AM | info | Message: Registrate new user. | UID: 1 | UIP:  | TID: 7 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:36:20 AM | ERROR | Message: Error SendEmail, email ->neyton61@gmail.com , Message:The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. Learn more at | UID: 0 | UIP:  | TID: 7 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:37:47 AM | info | Message: Start server program. | UID: 0 | UIP:  | TID: 1 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:39:57 AM | info | Message: Start server program. | UID: 0 | UIP:  | TID: 1 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:40:07 AM | info | Message: Validating email->'neyton61@gmail.com | UID: 0 | UIP:  | TID: 5 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:40:08 AM | info | Message: Registrate new user. | UID: 2 | UIP:  | TID: 5 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:40:09 AM | ERROR | Message: Error SendEmail, email ->neyton61@gmail.com , Message:The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. Learn more at | UID: 0 | UIP:  | TID: 12 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:40:15 AM | info | Message: User login. | UID: 2 | UIP:  | TID: 12 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:43:16 AM | info | Message: Create file. | UID: 0 | UIP:  | TID: 17 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:43:16 AM | info | Message: Get IPA set info. | UID: 0 | UIP:  | TID: 17 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:43:16 AM | info | Message: Create installation plist. | UID: 0 | UIP:  | TID: 17 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:43:16 AM | ERROR | Message: Server can't create installation plist. | UID: 0 | UIP:  | TID: 17 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/17/20 10:43:16 AM | info | Message: Uploaded IPA build, Hash ->eS8im8. | UID: 0 | UIP:  | TID: 17 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 

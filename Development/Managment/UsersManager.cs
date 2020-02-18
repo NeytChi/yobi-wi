@@ -75,6 +75,7 @@ namespace YobiWi.Development
                 user.userHash = Validator.GenerateHash(100);
                 user.createdAt = DateTimeOffset.Now.ToUnixTimeSeconds();
                 user.userToken = Validator.GenerateHash(40);
+                user.activate = true;
                 context.Users.Add(user);
                 context.SaveChanges();
                 Log.Info("Registrate new user.", user.userId);
