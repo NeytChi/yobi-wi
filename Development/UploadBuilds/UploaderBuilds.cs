@@ -46,35 +46,28 @@ namespace YobiWi.Development
         }
         public Build UploadIpa(IFormFile build, string userToken, ref string message)
         {
-            if (build != null)
-            {
-                string hash = Validator.GenerateHash(6);
-                string pathDirectory = CreateBuildDirectory(build, hash, ref message);
-                if (pathDirectory != null)
-                {
-                    string plistPath = SearchPathToFile("Info.plist", pathDirectory);
-                    if (!string.IsNullOrEmpty(plistPath))
-                    {
-                        Build ipa = GetIpaBuildWithInto(plistPath, pathDirectory);
-                        if (ipa != null)
-                        { 
-                            ipa.userId = GetUserId(userToken);
-                            ipa.buildHash = hash;
-                            ipa.archiveName = build.FileName;
-                            ipa.urlArchive = hash + "/" + build.FileName;
-                            ipa.urlInstall = hash + "/" + hash + ".info";
-                            ipa.createdAt = DateTimeOffset.Now.ToUnixTimeSeconds();
-                            CreateInstallPlist(ipa, hash);
-                            SaveBuild(ipa);
-                            Log.Info("Uploaded IPA build, Hash ->" + hash + ".");
-                            return ipa;
-                        }
+            string hash = Validator.GenerateHash(6);
+            string pathDirectory = CreateBuildDirectory(build, hash, ref message);
+            if (pathDirectory != null) {
+                string plistPath = SearchPathToFile("Info.plist", pathDirectory);
+                if (!string.IsNullOrEmpty(plistPath)) {
+                    Build ipa = GetIpaBuildWithInto(plistPath, pathDirectory);
+                    if (ipa != null) { 
+                        ipa.userId = GetUserId(userToken);
+                        ipa.buildHash = hash;
+                        ipa.archiveName = build.FileName;
+                        ipa.urlArchive = hash + "/" + build.FileName;
+                        ipa.urlInstall = hash + "/" + hash + ".plist";
+                        ipa.createdAt = DateTimeOffset.Now.ToUnixTimeSeconds();
+                        CreateInstallPlist(ipa, hash);
+                        SaveBuild(ipa);
+                        Log.Info("Uploaded IPA build, Hash ->" + hash + ".");
+                        return ipa;
                     }
-                    else
-                    {
-                        message = "Can't search plist file.";
-                        Log.Error(message);
-                    }
+                }
+                else {
+                    message = "Can't search plist file.";
+                    Log.Error(message);
                 }
             }
             return null;

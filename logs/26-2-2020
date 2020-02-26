@@ -1,0 +1,6 @@
+Created at: 2/26/20 3:36:43 PM | info | Message: Start server program. | UID: 0 | UIP:  | TID: 1 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/26/20 3:37:20 PM | info | Message: Create file. | UID: 0 | UIP:  | TID: 6 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/26/20 3:37:20 PM | info | Message: Get IPA set info. | UID: 0 | UIP:  | TID: 6 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/26/20 3:37:20 PM | info | Message: Create installation plist. | UID: 0 | UIP:  | TID: 6 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/26/20 3:37:20 PM | ERROR | Message: Server can't create installation plist. | UID: 0 | UIP:  | TID: 6 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/26/20 3:37:20 PM | info | Message: Uploaded IPA build, Hash ->RT2vVN. | UID: 0 | UIP:  | TID: 6 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 

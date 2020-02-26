@@ -1,0 +1,8 @@
+Created at: 2/21/20 1:41:17 PM | info | Message: Start server program. | UID: 0 | UIP:  | TID: 1 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/21/20 1:41:42 PM | ERROR | Message: Log->message - is null or emply, call WriteLogMessage() | UID: 0 | UIP:  | TID: 13 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/21/20 1:42:21 PM | ERROR | Message: Log->message - is null or emply, call WriteLogMessage() | UID: 0 | UIP:  | TID: 6 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/21/20 1:42:37 PM | info | Message: Create file. | UID: 0 | UIP:  | TID: 13 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/21/20 1:42:37 PM | info | Message: Get IPA set info. | UID: 0 | UIP:  | TID: 13 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/21/20 1:42:38 PM | info | Message: Create installation plist. | UID: 0 | UIP:  | TID: 13 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/21/20 1:42:38 PM | ERROR | Message: Server can't create installation plist. | UID: 0 | UIP:  | TID: 13 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
+Created at: 2/21/20 1:42:38 PM | info | Message: Uploaded IPA build, Hash ->VRqu5h. | UID: 0 | UIP:  | TID: 13 | UPC: neytchi-neytchi-Lenovo-ideapad-310-15ISK | 
